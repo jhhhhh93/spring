@@ -1,6 +1,5 @@
 package kr.or.ddit.user.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;

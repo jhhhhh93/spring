@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lprod">
+	<select id="getAll" resultType="lprodVO">
+		select *
+		from lprod
+		order by 1
+	</select>
+	
+	<select id="getProd" resultType="LprodVO" parameterType="String">
+		select lprod_nm, lprod_gu, buyer_name, prod_id, prod_name, to_char(prod_price, 'L999,999,999') as prod_price
+		from lprod, prod, buyer
+		where lprod_gu = prod_lgu
+		and prod_buyer = buyer_id
+		and lprod_gu = #{lprod_gu}
+		order by 1
+	</select>
+	
+	<select id="getLprodPagingList" resultType="LprodVO" parameterType="page">
+		select a.*
+		from
+		        (select rownum rn, a.*
+		        from
+		                (select a.*
+		                from lprod a
+		                order by lprod_id) a) a
+		where rn between #{pageSize}*(#{page}-1) + 1 and #{page}*#{pageSize}
+	</select>
+	
+	<select id="getProdTotalCnt" resultType="Integer">
+		select count(*)
+		from lprod
+	</select>
+</mapper>

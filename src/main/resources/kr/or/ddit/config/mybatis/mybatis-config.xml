@@ -7,9 +7,11 @@
 	<typeAliases>
 		<typeAlias alias="user" type="kr.or.ddit.user.model.User"/>
 		<typeAlias alias="page" type="kr.or.ddit.common.model.Page"/>
+		<typeAlias alias="lprodVO" type="kr.or.ddit.lprod.model.LprodVO"/>
 	</typeAliases>
 	
   <mappers>
     <mapper resource="kr/or/ddit/config/mybatis/mapper/user.xml"/>
+    <mapper resource="kr/or/ddit/config/mybatis/mapper/lprod.xml"/>
   </mappers>
 </configuration>

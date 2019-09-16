@@ -1,6 +1,7 @@
 package kr.or.ddit.test.user.repository;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,23 +10,16 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import kr.or.ddit.common.model.Page;
+import kr.or.ddit.config.test.RootTestConfig;
 import kr.or.ddit.encrypt.kisa.sha256.KISA_SHA256;
 import kr.or.ddit.user.dao.IUserDao;
 import kr.or.ddit.user.model.User;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {
-		"classpath:kr/or/ddit/config/spring/context-root.xml", 
-		"classpath:kr/or/ddit/config/spring/context-datasource.xml",
-		"classpath:kr/or/ddit/config/spring/context-transaction.xml"})
-public class UserDaoTest {
+public class UserDaoTest extends RootTestConfig{
 	
 	private static final Logger logger = LoggerFactory.getLogger(UserDaoTest.class);
 	
@@ -34,6 +28,8 @@ public class UserDaoTest {
 	
 	@Resource(name="userDao")
 	private IUserDao userDao;
+	private String userId = "brownTest";
+	
 	
 	@Test
 	public void getUserListTest() {
@@ -105,7 +101,7 @@ public class UserDaoTest {
 			/*** Then ***/
 			assertEquals(10, userList.size());
 			logger.debug(userList.get(0).getUserId());
-			assertEquals("xuserid18", userList.get(0).getUserId());
+			assertEquals("xuserid19", userList.get(0).getUserId());
 			
 		}
 		
@@ -124,7 +120,6 @@ public class UserDaoTest {
 		public void insertUserTest() throws ParseException {
 			/***Given***/
 			User user = new User();
-			String userId = "browntest";
 			
 			user.setUserId(userId);
 			user.setUserNm("브라운테스트");
@@ -138,11 +133,9 @@ public class UserDaoTest {
 			user.setRealfilename("testfilename");
 			
 			/***When***/
-			int deleteCnt = userDao.deleteUser(userId);
 			int insertCnt = userDao.insertUser(user);
 			
 			/***Then***/
-			assertEquals(1, deleteCnt);
 			assertEquals(1, insertCnt);
 		}
 		

@@ -1,45 +1,31 @@
 package kr.or.ddit.test.user.service;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import kr.or.ddit.common.model.Page;
+import kr.or.ddit.config.test.RootTestConfig;
 import kr.or.ddit.encrypt.kisa.sha256.KISA_SHA256;
 import kr.or.ddit.user.model.User;
 import kr.or.ddit.user.service.IUserService;
-import kr.or.ddit.user.service.UserService;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {
-		"classpath:kr/or/ddit/config/spring/context-root.xml", 
-		"classpath:kr/or/ddit/config/spring/context-datasource.xml",
-		"classpath:kr/or/ddit/config/spring/context-transaction.xml"})
-public class UserServiceTest {
+public class UserServiceTest extends RootTestConfig{
 	
 	private static final Logger logger = LoggerFactory.getLogger(UserServiceTest.class);
 	
 	@Resource(name="userService")
 	private IUserService userService;
 	private String userId = "brownTest";
-	
-	@Before
-	public void setup() {
-		int deleteCnt = userService.deleteUser(userId);
-	}
 	
 	@Test
 	public void getUserListTest() {

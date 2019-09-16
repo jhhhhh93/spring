@@ -10,7 +10,7 @@
 	jdbc.user=pjh
 	jdbc.pass=java -->
 	
-	<context:property-placeholder location="classpath:kr/or/ddit/config/mybatis/db-test.properties"/>
+	<context:property-placeholder location="classpath:kr/or/ddit/config/mybatis/db.properties"/>
 	
 	<bean name="datasource" class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName" value="${jdbc.driver}"></property>

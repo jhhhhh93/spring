@@ -15,7 +15,7 @@ public class HelloController {
 	public String hello(Model model, HttpServletRequest request) {
 		
 		//기존에 request에 넣었던 속성을 스프링에서는 Model 객체에 넣는다.
-		//requset -> Modle
+		//request -> Model
 		//Session -> Session
 		//Application -> Application
 		

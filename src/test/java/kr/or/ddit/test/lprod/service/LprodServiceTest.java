@@ -57,11 +57,11 @@ public class LprodServiceTest extends RootTestConfig{
 
 		/*** When ***/
 		Map<String, Object> map = lprodService.getLprodPagingList(page);
-		List<LprodVO> prodPagingList = (List<LprodVO>) map.get("prodPagingList");
+		List<LprodVO> lprodPagingList = (List<LprodVO>) map.get("lprodPagingList");
 		int paginationSize = (int) map.get("paginationSize");
 		
 		/*** Then ***/
-		assertEquals(2, prodPagingList.size());
+		assertEquals(2, lprodPagingList.size());
 		assertEquals(3, paginationSize);
 		
 	}

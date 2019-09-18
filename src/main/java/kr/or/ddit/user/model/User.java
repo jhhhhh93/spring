@@ -2,6 +2,8 @@ package kr.or.ddit.user.model;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import kr.or.ddit.encrypt.kisa.sha256.KISA_SHA256;
@@ -9,6 +11,8 @@ import kr.or.ddit.encrypt.kisa.sha256.KISA_SHA256;
 public class User {
 	private String userNm;		// 사용자이름
 	private String userId;			// 사용자 아이디
+	
+	@NotNull
 	private String pass;			// 사용자 비밀번호
 	private String alias       ;
 	private String addr1       ;

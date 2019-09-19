@@ -88,8 +88,6 @@ $(document).ready(function(){
 </head>
 
 <body>
-	userId : ${userId}
-	
 	<div class="container">
 <%-- 		
 	<% 

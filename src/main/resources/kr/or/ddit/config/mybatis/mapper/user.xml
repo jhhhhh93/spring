@@ -39,7 +39,7 @@
 	
 	<insert id="insertUser" parameterType="user">
 		insert into users (userId, userNm, pass, reg_dt, alias, addr1, addr2, zipcode, filename, realfilename)
-		values(#{userId}, #{userNm}, #{pass}, #{reg_dt}, #{alias}, #{addr1}, #{addr2}, #{zipcode}, #{filename}, #{realfilename})
+		values(#{userId}, #{userNm}, #{pass}, #{reg_dt}, #{alias}, #{addr1}, #{addr2}, #{zipcode}, #{filename, jdbcType=VARCHAR}, #{realfilename, jdbcType=VARCHAR})
 	</insert>
 	
 	<delete id="deleteUser" parameterType="String">

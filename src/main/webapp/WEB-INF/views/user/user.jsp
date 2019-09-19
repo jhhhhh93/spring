@@ -36,14 +36,14 @@
 			</div>
 
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<form id="frm" class="form-horizontal" role="form" action="${cp}/userUpdate" method="get">
+				<form id="frm" class="form-horizontal" role="form" action="${cp}/user/userUpdate" method="get">
 					<input type="hidden" id="userId" name="userId" value="${user.userId }">
 				
 					<div class="form-group">
 						<label for="userNm" class="col-sm-2 control-label">사용자 사진</label>
 						<div class="col-sm-10">
 							<%-- <img src="${cp }${user.realfilename2 }"> --%>
-							<img src="${cp }/userPicture?userId=${user.userId}">
+							<img src="${cp }/user/userPicture?userId=${user.userId}">
 						</div>
 					</div>
 				
@@ -57,7 +57,7 @@
 					<div class="form-group">
 						<label for="userNm" class="col-sm-2 control-label">사용자 이름</label>
 						<div class="col-sm-10">
-							<label class="control-label">${user.userNM }</label>
+							<label class="control-label">${user.userNm }</label>
 						</div>
 					</div>
 					<div class="form-group">

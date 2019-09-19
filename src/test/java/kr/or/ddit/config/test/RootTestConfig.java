@@ -7,11 +7,15 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -23,8 +27,14 @@ public class RootTestConfig {
 	@Resource(name="datasource")
 	private BasicDataSource datasource;
 	
+	@Autowired	
+	private WebApplicationContext context;
+	
+	protected MockMvc mockMvc;
+	
 	@Before
 	public void setup() {
+		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
 		// init.sql에 있는 모든 sql 문장을 테스트 메서드 실행전에 실행
 		// init.sql에는 table 데이터 삭제, 데이터 입력 sql 문장이 있다.
 		ResourceDatabasePopulator populator = new ResourceDatabasePopulator();

@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,12 +25,12 @@
 	$(function(){
 		// 사용자 등록 버튼 클릭 이벤트 핸들러
 		$("#regBtn").on("click", function(){
-			var userIdValidationChk = /^([a-zA-Z\d\.@]){5,20}$/.test($("#userId").val());
-			if(userIdValidationChk == false){
-				alert("사용자 아이디가 유효하지 않습니다.");
-				$("#userId").focus();
-				return false;
-			}
+// 			var userIdValidationChk = /^([a-zA-Z\d\.@]){5,20}$/.test($("#userId").val());
+// 			if(userIdValidationChk == false){
+// 				alert("사용자 아이디가 유효하지 않ss습니다.");
+// 				$("#userId").focus();
+// 				return false;
+// 			}
 			
 			// submit;
 			$("#frm").submit();
@@ -52,7 +53,7 @@
 	function setTestData(){
 		$("#userId").val("brownTest");
 		$("#userNm").val("브라운테스트");
-		$("#userAlias").val("곰테스트");
+		$("#alias").val("곰테스트");
 		$("#reg_dt").val("2019-08-08");
 		$("#addr1").val("대전광역시 중구 중앙로 76");
 		$("#addr2").val("영민빌딩 2층 DDIT");
@@ -72,7 +73,7 @@
 			</div>
 
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<form id="frm" class="form-horizontal" role="form" action="${cp }/userForm" method="post" enctype="multipart/form-data">
+				<form id="frm" class="form-horizontal" role="form" action="${cp }/user/userForm" method="post" enctype="multipart/form-data">
 					
 					<div class="form-group">
 						<label for="picture" class="col-sm-2 control-label">사용자 사진</label>
@@ -87,7 +88,7 @@
 						<div class="col-sm-10">
 							<input type="text" class="form-control" id="userId" name="userId"
 								placeholder="사용자 아이디" value="${param.userId}">
-							${userIdMsg}
+							<font color="red"><form:errors path="user.userId"/></font>
 						</div>
 					</div>
 					
@@ -107,10 +108,10 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="userAlias" class="col-sm-2 control-label">별명</label>
+						<label for="alias" class="col-sm-2 control-label">별명</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="userAlias"
-								name="userAlias" placeholder="별명" value="${param.userAlias}">
+							<input type="text" class="form-control" id="alias"
+								name="alias" placeholder="별명" value="${param.alias}">
 						</div>
 					</div>
 					

@@ -27,14 +27,8 @@ public class RootTestConfig {
 	@Resource(name="datasource")
 	private BasicDataSource datasource;
 	
-	@Autowired	
-	private WebApplicationContext context;
-	
-	protected MockMvc mockMvc;
-	
 	@Before
 	public void setup() {
-		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
 		// init.sql에 있는 모든 sql 문장을 테스트 메서드 실행전에 실행
 		// init.sql에는 table 데이터 삭제, 데이터 입력 sql 문장이 있다.
 		ResourceDatabasePopulator populator = new ResourceDatabasePopulator();

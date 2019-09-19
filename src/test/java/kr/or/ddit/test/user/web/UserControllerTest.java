@@ -133,25 +133,4 @@ public class UserControllerTest extends WebTestConfig{
 		/***Then***/
 	}
 	
-	@Test
-	public void userUpdateTest() throws Exception {
-		
-		File f = new File("src/test/resources/kr/or/ddit/test/brown.png");
-		FileInputStream fis = new FileInputStream(f);
-		
-		MockMultipartFile file = new MockMultipartFile("picture", "brown.png", "", fis); 
-		
-		mockMvc.perform(fileUpload("/user/userUpdate")
-				.file(file)
-				.param("userId", "brownTest4")
-				.param("userNm", "브라운테스트")
-				.param("alias", "brownTest")
-				.param("reg_dt", "2019-09-17")
-				.param("addr1", "대전광역시 중구 선화로 76")
-				.param("addr2", "영민빌딩 2층")
-				.param("zipcode", "34940")
-				.param("pass", "brownTest1234"))
-		.andExpect(status().is(302));
-		}
-
 }

@@ -50,102 +50,99 @@
 </head>
 
 <body>
-<form id="frm" action="${cp}/user/user" method="get">
-	<input type="hidden" id="userId" name="userId">
-</form>
+	<form id="frm" action="${cp}/user/user" method="get">
+		<input type="hidden" id="userId" name="userId">
+	</form>
 
-<%@ include file="/WEB-INF/views/commonJsp/header.jsp" %>
-<div class="container-fluid">
+	<%@ include file="/WEB-INF/views/commonJsp/header.jsp"%>
+	<div class="container-fluid">
 		<div class="row">
-			
-<div class="col-sm-3 col-md-2 sidebar">
-	<%@ include file="/WEB-INF/views/commonJsp/left.jsp" %>
-</div>
 
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+			<div class="col-sm-3 col-md-2 sidebar">
+				<%@ include file="/WEB-INF/views/commonJsp/left.jsp"%>
+			</div>
 
-<div class="row">
-	<div class="col-sm-8 blog-main">
-		<h2 class="sub-header">사용자</h2>
-		<div class="table-responsive">
-			<table class="table table-striped">
-				<tr>
-					<th>사용자 아이디</th>
-					<th>사용자 이름</th>
-					<th>사용자 별명</th>
-					<th>등록일시</th>
-				</tr>
-				<c:forEach items="${userList}" var="user">
-					<tr class="userTr" data-userId="${user.userId}">
-						<input type="hidden" value="${user.userId}"/>
-						<td>${user.userId}</td>
-						<td>${user.userNm}</td>
-						<td>${user.alias}</td>
-						<td><fmt:formatDate value="${user.reg_dt}" pattern="yyyy/MM/dd"/></td>
-						
-					</tr>
-				</c:forEach>
-			</table>
-		</div>
+			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-		<a href="${cp }/user/userForm" class="btn btn-default pull-right">사용자 등록</a>
+				<div class="row">
+					<div class="col-sm-8 blog-main">
+						<h2 class="sub-header">사용자</h2>
+						<div class="table-responsive">
+							<table class="table table-striped">
+								<tr>
+									<th>사용자 아이디</th>
+									<th>사용자 이름</th>
+									<th>사용자 별명</th>
+									<th>등록일시</th>
+								</tr>
+								<c:forEach items="${userList}" var="user">
+									<tr class="userTr" data-userId="${user.userId}">
+										<input type="hidden" value="${user.userId}" />
+										<td>${user.userId}</td>
+										<td>${user.userNm}</td>
+										<td>${user.alias}</td>
+										<td><fmt:formatDate value="${user.reg_dt}"
+												pattern="yyyy/MM/dd" /></td>
 
-		<div class="text-center">
-			<ul class="pagination">
-				<%-- 
+									</tr>
+								</c:forEach>
+							</table>
+						</div>
+
+						<a href="${cp }/user/userForm" class="btn btn-default pull-right">사용자
+							등록</a>
+
+						<div class="text-center">
+							<ul class="pagination">
+								<%-- 
 					이전 페이지 가기 : 지금 있는 페이지에서 한 페이지 전으로
 					단, 1페이지인 경우에는 li 태그에 class="disabled"를 추가를 하고 이동경로는 차단
 				--%>
-				<c:choose>
-					<c:when test="${pageVo.page == 1}">
-						<li class="disabled">
-						    <a href="#" aria-label="Previous">
-						    	<span aria-hidden="true">&laquo;</span>
-						    </a>
-					    </li>
-					</c:when>
-					<c:otherwise>
-						<li>
-						    <a href="${cp}/user/userPagingList?page=${pageVo.page-1}&pageSize=10" aria-label="Previous">
-						    	<span aria-hidden="true">&laquo;</span>
-						    </a>
-					    </li>
-					</c:otherwise>
-				</c:choose>
-				
-			    
-				<c:forEach begin="1" end="${paginationSize}" var="page">
-					<c:choose>
-						<c:when test="${page == pageVo.page }">
-							<li class="active"><span>${page}</span></li>
-						</c:when>
-						<c:otherwise>
-							<li><a href="${cp}/user/userPagingList?page=${page}&pageSize=10">${page}</a></li>
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
-				<c:choose>
-					<c:when test="${pageVo.page == paginationSize}">
-						<li class="disabled">
-						    <a href="#" aria-label="Next">
-						    	<span aria-hidden="true">&raquo;</span>
-						    </a>
-					    </li>
-					</c:when>
-					<c:otherwise>
-						<li>
-						    <a href="${cp}/user/userPagingList?page=${pageVo.page+1}&pageSize=10" aria-label="Next">
-						    	<span aria-hidden="true">&raquo;</span>
-						    </a>
-					    </li>
-					</c:otherwise>
-				</c:choose>
-				
-			</ul>
-		</div>
-	</div>
-</div>
-	</div>
+								<c:choose>
+									<c:when test="${pageVo.page == 1}">
+										<li class="disabled"><a href="#" aria-label="Previous">
+												<span aria-hidden="true">&laquo;</span>
+										</a></li>
+									</c:when>
+									<c:otherwise>
+										<li><a
+											href="${cp}/user/userPagingList?page=${pageVo.page-1}&pageSize=10"
+											aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+										</a></li>
+									</c:otherwise>
+								</c:choose>
+
+
+								<c:forEach begin="1" end="${paginationSize}" var="page">
+									<c:choose>
+										<c:when test="${page == pageVo.page }">
+											<li class="active"><span>${page}</span></li>
+										</c:when>
+										<c:otherwise>
+											<li><a
+												href="${cp}/user/userPagingList?page=${page}&pageSize=10">${page}</a></li>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+								<c:choose>
+									<c:when test="${pageVo.page == paginationSize}">
+										<li class="disabled"><a href="#" aria-label="Next"> <span
+												aria-hidden="true">&raquo;</span>
+										</a></li>
+									</c:when>
+									<c:otherwise>
+										<li><a
+											href="${cp}/user/userPagingList?page=${pageVo.page+1}&pageSize=10"
+											aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+										</a></li>
+									</c:otherwise>
+								</c:choose>
+
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>

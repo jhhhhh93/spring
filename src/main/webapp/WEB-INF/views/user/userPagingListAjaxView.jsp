@@ -62,10 +62,10 @@
 		})
 	}
 	
-	function getUserListRequestBody(page, pagesize){
+	function getUserListRequestBody(page, pageSize){
 		var param = {};
 		param.page = page;
-		param.pagesize = pagesize;
+		param.pageSize = pageSize;
 		console.log("param : " + param);
 		$.ajax({
 			url : "${cp}/user/userPagingListAjaxRequestBody",
@@ -74,6 +74,7 @@
 			method : "post",
 			data : JSON.stringify(param),
 			success : function(data){
+				console.log(data)
 				createUserListTbody(data.userList);		//userList.html 생성
 				createPagination(data.pageVo, data.paginationSize);	//페이지 네이션 html 생성
 			}

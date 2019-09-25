@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletOutputStream;
@@ -14,9 +15,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.ddit.common.model.Page;
@@ -210,4 +214,51 @@ public class UserController {
 		
 	}
 	
+	@RequestMapping("userPagingListAjax")
+	public String userPagingListAjax(Page page, Model model) {
+		
+		model.addAttribute("pageVo", page);
+		
+		List<User> userList = (List<User>) userService.getUserPagingList(page).get("userList");
+		int paginationSize = (int) userService.getUserPagingList(page).get("paginationSize");
+	
+		model.addAttribute("userList", userList);
+		model.addAttribute("paginationSize", paginationSize);
+		
+		return "jsonView";
+	}
+	
+	@RequestMapping(path = "userPagingListAjaxView")
+	public String userPagingListAjaxView() {
+		return "user/userPagingListAjaxView";
+	}
+	
+	/**
+	* Method : userPagingListHtmlAjax
+	* 작성자 : PC-21
+	* 변경이력 :
+	* @return
+	* Method 설명 : 사용자 페이징 리스트의 결과를 html로 생성한다.(jsp)
+	*/
+	@RequestMapping("userPagingListHtmlAjax")
+	public String userPagingListHtmlAjax(@RequestParam(defaultValue = "1") int page,
+										 @RequestParam(defaultValue = "10") int pagesize,
+										 Model model) {
+		Page pageVo = new Page(page, pagesize);
+		Map<String, Object> resultMap = userService.getUserPagingList(pageVo);
+		model.addAllAttributes(resultMap);
+		model.addAttribute("pageVo", pageVo);
+		
+		return "user/userPagingListHtmlAjax";
+	}
+	
+	@RequestMapping(path = "userPagingListAjaxRequestBody", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> userPagingListAjaxRequestBody(@RequestBody Page page, Model model) {
+		Map<String, Object> resultMap = userService.getUserPagingList(page);
+		resultMap.put("pageVo", page);
+		
+		return resultMap;
+		
+	}
 }

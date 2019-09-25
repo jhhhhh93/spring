@@ -16,7 +16,7 @@ public class FileUtil {
 		String extName = getExtension(originalFileName);
 		File file = new File(path + "\\" + uuidFileName + extName);
 		
-		FileInfo fileInfo = new FileInfo(file, extName, originalFileName);
+		FileInfo fileInfo = new FileInfo(file, originalFileName, extName);
 		
 		return fileInfo;
 	}

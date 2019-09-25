@@ -6,6 +6,9 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
+
 import kr.or.ddit.encrypt.kisa.sha256.KISA_SHA256;
 
 public class User {
@@ -23,6 +26,7 @@ public class User {
 	private String realfilename2;
 	private int age;
 	
+	@JsonFormat(shape = Shape.STRING, pattern = "yyyy-MM-dd")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date reg_dt;
 	
